@@ -82,9 +82,12 @@ test("page does not expose live Amap navigation links", () => {
 
 test("page uses a Shenzhen-style thumbnail map instead of abstract blobs", () => {
   const html = readFileSync("index.html", "utf8");
+  const css = readFileSync("styles.css", "utf8");
 
   assert.match(html, /class="[^"]*\bgeo-map\b[^"]*"/);
+  assert.match(html, /class="map-canvas"/);
   assert.match(html, /深圳行政区静态缩略图/);
+  assert.match(css, /--mobile-map-width:\s*760px/);
   assert.doesNotMatch(html, /class="district west"/);
 });
 

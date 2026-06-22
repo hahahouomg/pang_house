@@ -15,6 +15,9 @@
   --red: #c24130;
   --shadow: 0 16px 40px rgba(23, 32, 42, 0.12);
   --radius: 8px;
+  --map-height: 660px;
+  --mobile-map-width: 760px;
+  --mobile-map-height: 600px;
   font-family:
     "Trebuchet MS",
     "Microsoft YaHei",
@@ -234,12 +237,19 @@ h1 {
 
 .map-frame {
   position: relative;
-  min-height: 660px;
+  min-height: var(--map-height);
   overflow: hidden;
   border: 2px solid var(--line);
   border-radius: var(--radius);
   background: #dbf2f4;
   isolation: isolate;
+}
+
+.map-canvas {
+  position: relative;
+  width: 100%;
+  min-height: var(--map-height);
+  height: var(--map-height);
 }
 
 .city-illustration {
@@ -911,7 +921,41 @@ h1 {
   }
 
   .map-frame {
-    min-height: 560px;
+    min-height: var(--mobile-map-height);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    scrollbar-width: thin;
+  }
+
+  .map-canvas {
+    width: var(--mobile-map-width);
+    min-width: var(--mobile-map-width);
+    min-height: var(--mobile-map-height);
+    height: var(--mobile-map-height);
+  }
+
+  .map-pin {
+    grid-template-columns: 32px;
+    grid-template-rows: 32px 18px;
+    min-width: 46px;
+    min-height: 54px;
+  }
+
+  .map-pin::before {
+    width: 32px;
+    height: 32px;
+  }
+
+  .target-marker {
+    width: 68px;
+    min-height: 66px;
+  }
+
+  .target-marker svg {
+    width: 40px;
+    height: 40px;
   }
 
   .metric-grid {
